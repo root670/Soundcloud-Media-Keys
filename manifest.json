@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "description": "Control Soundcloud player using media keys.",
 
-    //"permissions": ["tabs", "http://*/*", "https://*/*"],
     "content_scripts": [{
         "matches": ["https://soundcloud.com/*"],
         "js": ["inject.js"]
@@ -29,6 +28,13 @@
                 "default": "MediaNextTrack"
             },
             "description": "Next Track",
+            "global": true
+        },
+        "prev": {
+            "suggested_key": {
+                "default": "MediaPrevTrack"
+            },
+            "description": "Previous Track",
             "global": true
         }
     }
