@@ -1,19 +1,20 @@
-// Inject listener script into the soundcloud page
-// http://stackoverflow.com/a/9517879
-var s = document.createElement('script');
-s.src = chrome.extension.getURL('listener.js');
-s.onload = function() {
-    this.parentNode.removeChild(this);
+// http://www.nonobtrusive.com/2011/11/29/programatically-fire-crossbrowser-click-event-with-javascript/
+var doClick = function(className) {
+    var node = document.getElementsByClassName(className)[0];
+    var evt = document.createEvent('MouseEvents');
+    evt.initEvent('click', true, false);
+    node.dispatchEvent(evt);
 };
-(document.head || document.documentElement).appendChild(s);
 
-// Forward command events to listener.js
-// http://stackoverflow.com/a/19312198
+// Simulate clicking on elements by class name
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        var evt=document.createEvent("CustomEvent");
-        evt.initCustomEvent("scListenerEvt", true, true, request.cmd);
-        document.dispatchEvent(evt);
+        if(request.cmd == "play-pause")
+            doClick("playControl");
+        else if(request.cmd == "next")
+            doClick("skipControl__next");
+        else if(request.cmd == "prev")
+            doClick("skipControl__previous");
 });
 
 // This will be received by background.js so it can get soundcloud's tab id
