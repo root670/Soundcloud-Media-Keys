@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Soundcloud Media Keys",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Control Soundcloud player using media keys.",
 
     "content_scripts": [{
@@ -12,8 +12,6 @@
     "background": {
         "scripts": ["background.js"]
     },
-
-    "web_accessible_resources": ["listener.js"],
 
     "commands": {
         "play-pause": {
